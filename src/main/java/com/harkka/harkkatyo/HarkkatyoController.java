@@ -6,8 +6,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.ArrayList;
 
 @SpringBootApplication
 @Controller
@@ -16,15 +19,20 @@ public class HarkkatyoController {
     @Autowired
     TapahtumaRepository tapahtumaRepository;
 
+    @Autowired
+    HenkiloRepository henkiloRepository;
+
     @GetMapping("/")
     public String home(Model model) {
         model.addAttribute("tapahtuma", tapahtumaRepository.findAll());
         return "home";
     }
+
     @PostMapping("/events/create")
-    public String create(@RequestParam String tapahtumaNimi, @RequestParam String tapahtumaPaikka,
-                         @RequestParam String mista, @RequestParam String mihin) {
-        tapahtumaRepository.save(new Tapahtuma(tapahtumaNimi,tapahtumaPaikka, mista, mihin));
+    public String create(@PathVariable Long henkiloId, @PathVariable Long tapahtumaId) {
+        Henkilo p = henkiloRepository.getOne(henkiloId);
+        Tapahtuma t = new Tapahtuma();
+        tapahtumaRepository.save(t);
         return "redirect:/";
     }
 }
