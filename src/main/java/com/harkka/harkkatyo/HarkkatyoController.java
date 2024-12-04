@@ -29,9 +29,9 @@ public class HarkkatyoController {
     }
 
     @PostMapping("/events/create")
-    public String create(@PathVariable Long henkiloId, @PathVariable Long tapahtumaId) {
+    public String create(@PathVariable Long tapahtumaId) {
         Henkilo p = henkiloRepository.getOne(henkiloId);
-        Tapahtuma t = new Tapahtuma();
+        Tapahtuma t = new Tapahtuma(new);
         tapahtumaRepository.save(t);
         return "redirect:/";
     }
