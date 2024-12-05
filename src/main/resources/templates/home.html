@@ -22,11 +22,14 @@
     <button type="submit">Create Event</button>
 
 </form>
-<p th:each="alkio : ${tapahtuma}">
+<ul>
+<li th:each="alkio : ${tapahtuma}">
     <span th:text="${alkio.tapahtumaNimi}"></span>
     <span th:text="${alkio.tapahtumaPaikka}"></span>
     <span th:text="${alkio.mista}"></span>
     <span th:text="${alkio.mihin}"></span>
-</p>
+</li>
+</ul>
 </body>
 </html>
+

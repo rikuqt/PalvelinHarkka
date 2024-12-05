@@ -2,6 +2,7 @@ package com.harkka.harkkatyo;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.ParameterResolutionDelegate;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,9 +30,13 @@ public class HarkkatyoController {
     }
 
     @PostMapping("/events/create")
-    public String create(@PathVariable Long tapahtumaId) {
-        Henkilo p = henkiloRepository.getOne(henkiloId);
-        Tapahtuma t = new Tapahtuma(new);
+    public String create(@RequestParam String tapahtumaPaikka,
+                         @RequestParam String tapahtumaNimi,
+                         @RequestParam String mista,
+                         @RequestParam String mihin,
+                         @PathVariable Long id) {
+        Henkilo h = henkiloRepository.getOne(id);
+        // Tapahtuma t = new Tapahtuma(tapahtumaPaikka, tapahtumaNimi, mista, mihin, h);
         tapahtumaRepository.save(t);
         return "redirect:/";
     }

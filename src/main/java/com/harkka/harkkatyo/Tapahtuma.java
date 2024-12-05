@@ -25,4 +25,6 @@ public class Tapahtuma extends AbstractPersistable<Long> {
             joinColumns = { @JoinColumn(name = "tapahtuma_id") },
             inverseJoinColumns = { @JoinColumn(name = "henkilo_id") })
     private List<Henkilo> henkilot = new ArrayList<>();
+
+
 }
