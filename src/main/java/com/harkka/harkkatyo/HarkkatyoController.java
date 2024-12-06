@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootApplication
 @Controller
@@ -25,19 +27,36 @@ public class HarkkatyoController {
 
     @GetMapping("/")
     public String home(Model model) {
-        model.addAttribute("tapahtuma", tapahtumaRepository.findAll());
+        model.addAttribute("tapahtumat", tapahtumaRepository.findAll());
+        model.addAttribute("henkilot", henkiloRepository.findAll());
         return "home";
     }
+
+
 
     @PostMapping("/events/create")
     public String create(@RequestParam String tapahtumaPaikka,
                          @RequestParam String tapahtumaNimi,
                          @RequestParam String mista,
                          @RequestParam String mihin,
-                         @PathVariable Long id) {
-        Henkilo h = henkiloRepository.getOne(id);
-        // Tapahtuma t = new Tapahtuma(tapahtumaPaikka, tapahtumaNimi, mista, mihin, h);
-        tapahtumaRepository.save(t);
+                         @RequestParam String nimi) {
+
+        Henkilo henkilo = henkiloRepository.findByNimi(nimi)
+                .orElseGet(() -> {
+                    Henkilo newHenkilo = new Henkilo();
+                    newHenkilo.setNimi(nimi);
+                    return henkiloRepository.save(newHenkilo);
+                });
+
+        Tapahtuma tapahtuma = new Tapahtuma();
+        tapahtuma.setTapahtumaPaikka(tapahtumaPaikka);
+        tapahtuma.setTapahtumaNimi(tapahtumaNimi);
+        tapahtuma.setMista(mista);
+        tapahtuma.setMihin(mihin);
+        tapahtuma.getHenkilot().add(henkilo);
+
+        tapahtumaRepository.save(tapahtuma);
+
         return "redirect:/";
     }
 }

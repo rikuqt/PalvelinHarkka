@@ -1,17 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Tapahtuma kalenteri</title>
 </head>
 <body>
 <h1>Tapahtumat</h1>
-    <form action="/events/create" method="post">
+<table>
+    <thead>
+    <tr>
+        <th>Tapahtuma paikka</th>
+        <th>Tapahtuman nimi</th>
+        <th>Varaaja</th>
+        <th>Koska alkaa</th>
+        <th>Koska loppuu</th>
+    </tr>
+    </thead>
+    <tbody th:each="tapahtuma : ${tapahtumat}">
+    <tr>
+        <td th:text="${tapahtuma.tapahtumaPaikka}">Tapahtuma paikka</td>
+        <td th:text="${tapahtuma.tapahtumaNimi}">Tapahtuman nimi</td>
+        <td>
+            <p th:each="henkilo : ${tapahtuma.henkilot}" th:text="${henkilo.nimi}">Varaaja</p>
+        </td>
+        <td th:text="${tapahtuma.mista}">Koska alkaa</td>
+        <td th:text="${tapahtuma.mihin}">Koska loppuu</td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>Luo Tapahtuma</h2>
+
+<form action="/events/create" method="post">
     <label for="eventTitle">Mikä Tapahtuma:</label>
     <input type="text" id="eventTitle" name="tapahtumaNimi" required>
 
-        <label for="place">Missä:</label>
-        <input type="text" id="place" name="tapahtumaPaikka" required>
+    <label for="place">Missä:</label>
+    <input type="text" id="place" name="tapahtumaPaikka" required>
+
+    <label for="place">Varaajan nimi:</label>
+    <input type="text" id="name" name="nimi" required>
 
     <label for="start">Milloin alkaa</label>
     <input type="date" id="start" name="mista" required min="2024-12-01" max="2030-12-31" value="2024-12-02">
@@ -22,14 +50,7 @@
     <button type="submit">Create Event</button>
 
 </form>
-<ul>
-<li th:each="alkio : ${tapahtuma}">
-    <span th:text="${alkio.tapahtumaNimi}"></span>
-    <span th:text="${alkio.tapahtumaPaikka}"></span>
-    <span th:text="${alkio.mista}"></span>
-    <span th:text="${alkio.mihin}"></span>
-</li>
-</ul>
+
 </body>
 </html>
 
