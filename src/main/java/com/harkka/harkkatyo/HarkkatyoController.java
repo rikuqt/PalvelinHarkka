@@ -27,11 +27,19 @@ public class HarkkatyoController {
         return "home";
     }
 
+    @GetMapping("/tapahtumat")
+    public String tapahtumat(Model model) {
+        model.addAttribute("kaikkiTapahtumat", tapahtumaRepository.findAll());
+        return "tapahtumat";
+    }
+
 
     @GetMapping("/tapahtumat/{id}")
-    public String tapahtumat(@PathVariable long id, Model model) {
-        model.addAttribute("tapahtumaVaraukset", tapahtumaRepository.getOne(id));
-        return "tapahtumat";
+    public String tapahtumaDetails(@PathVariable long id, Model model) {
+        Tapahtuma tapahtuma = tapahtumaRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid tapahtuma ID: " + id));
+        model.addAttribute("tapahtuma", tapahtuma);
+        return "tapahtuma-tiedot";
     }
 
     @PostMapping("/events/delete/{id}")

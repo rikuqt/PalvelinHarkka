@@ -9,8 +9,8 @@
 <table>
     <thead>
     <tr>
-        <th>Tapahtuma paikka</th>
         <th>Tapahtuman nimi</th>
+        <th>Tapahtuma paikka</th>
         <th>Varaaja</th>
         <th>Koska alkaa</th>
         <th>Koska loppuu</th>
@@ -18,8 +18,8 @@
     </thead>
     <tbody th:each="tapahtuma : ${tapahtumat}">
     <tr>
-        <td th:text="${tapahtuma.tapahtumaPaikka}">Tapahtuma paikka</td>
         <td th:text="${tapahtuma.tapahtumaNimi}">Tapahtuman nimi</td>
+        <td th:text="${tapahtuma.tapahtumaPaikka}">Tapahtuma paikka</td>
         <td>
             <p th:each="henkilo : ${tapahtuma.henkilot}" th:text="${henkilo.nimi}">Varaaja</p>
         </td>
@@ -33,10 +33,11 @@
     </tr>
     </tbody>
 </table>
+<a href="/" th:href="@{/tapahtumat}">Kaikki tapahtumat</a>
 
 <h2>Luo Tapahtuma</h2>
 
-<form action="/events/create" method="post">
+<form action="/events/create" method="post" style="display: flex; flex-direction: column; gap: 10px; max-width: 400px;">
     <label for="eventTitle">Mikä Tapahtuma:</label>
     <input type="text" id="eventTitle" name="tapahtumaNimi" required>
 
@@ -52,7 +53,7 @@
     <label for="end">Milloin päättyy</label>
     <input type="date" id="end" name="mihin" required min="2024-12-01" max="2030-12-31" value="2025-01-01">
 
-    <button type="submit">Create Event</button>
+    <button type="submit">Luo tapahtuma</button>
 
 </form>
 </body>

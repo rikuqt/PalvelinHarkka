@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tapahtuma Details</title>
+</head>
+
+<body>
+<h1 th:text="${tapahtuma.tapahtumaNimi}">Tapahtuma Name</h1>
+
+<p>
+    <strong>Paikka:</strong> <span th:text="${tapahtuma.tapahtumaPaikka}">Tapahtuma Paikka</span><br>
+    <strong>Mistä:</strong> <span th:text="${tapahtuma.mista}">Start Time</span><br>
+    <strong>Mihin:</strong> <span th:text="${tapahtuma.mihin}">End Time</span><br>
+</p>
+
+<h2>Varaaja:</h2>
+<ul>
+    <li th:each="henkilo : ${tapahtuma.henkilot}" th:text="${henkilo.nimi}">Henkilö</li>
+</ul>
+<a href="/" th:href="@{/tapahtumat}">takaisin</a>
+<a href="/" th:href="@{/}">Pääsivulle</a>
+</body>
+</html>

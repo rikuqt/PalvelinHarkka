@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Varaus</title>
+  <title>Tapahtumat</title>
 </head>
 
 <body>
-<h1>Tapahtuma</h1>
+<h1>Kaikki Tapahtumat</h1>
 
 <ul>
-  <li th:each="varaus: ${tapahtumaVaraukset}">
-    <a th:href="@{/tapahtumat/{id}(id=${varaus.id})}">
-      <span th:text="${varaus.tapahtumaNimi}">Varaus nimi</span>
+  <li th:each="tapahtuma : ${kaikkiTapahtumat}">
+    <a th:href="@{/tapahtumat/{id}(id=${tapahtuma.id})}">
+      <span th:text="${tapahtuma.tapahtumaNimi}">Tapahtuman nimi</span>
     </a>
   </li>
 </ul>
+<a href="/" th:href="@{/}">Pääsivulle</a>
 </body>
 </html>
