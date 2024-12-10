@@ -13,15 +13,18 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable()) // Disable CSRF (use cautiously in production)
-                .headers(headers -> headers.frameOptions(frame -> frame.sameOrigin())) // Allow H2 Console frames
+                .csrf(csrf -> csrf.disable())
+                .headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/h2-console/**").permitAll() // Allow access to H2 Console
-                        .requestMatchers("/accounts/**").permitAll() // Allow access to /accounts
-                        .anyRequest().authenticated() // Require authentication for all other paths
+                        .requestMatchers("/h2-console/**").permitAll()
+                        .requestMatchers("/accounts/**").permitAll()
+                        .anyRequest().authenticated()
                 )
-                .formLogin(form -> form.permitAll()) // Enable login
-                .logout(logout -> logout.permitAll()); // Enable logout
+                .formLogin(form -> form
+                        .defaultSuccessUrl("/", true) // Redirectaus
+                        .permitAll()
+                )
+                .logout(logout -> logout.permitAll());
 
         return http.build();
     }

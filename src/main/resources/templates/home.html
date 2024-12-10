@@ -25,6 +25,11 @@
         </td>
         <td th:text="${tapahtuma.mista}">Koska alkaa</td>
         <td th:text="${tapahtuma.mihin}">Koska loppuu</td>
+        <td>
+            <form th:action="@{/events/delete/{id}(id=${tapahtuma.id})}" method="post" style="display:inline;">
+                <button type="submit">Poista</button>
+            </form>
+        </td>
     </tr>
     </tbody>
 </table>
@@ -50,7 +55,6 @@
     <button type="submit">Create Event</button>
 
 </form>
-
 </body>
 </html>
 

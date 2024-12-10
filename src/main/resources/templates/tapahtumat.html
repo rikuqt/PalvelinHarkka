@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Varaus</title>
+</head>
+
+<body>
+<h1>Tapahtuma</h1>
+
+<ul>
+  <li th:each="varaus: ${tapahtumaVaraukset}">
+    <a th:href="@{/tapahtumat/{id}(id=${varaus.id})}">
+      <span th:text="${varaus.tapahtumaNimi}">Varaus nimi</span>
+    </a>
+  </li>
+</ul>
+</body>
+</html>

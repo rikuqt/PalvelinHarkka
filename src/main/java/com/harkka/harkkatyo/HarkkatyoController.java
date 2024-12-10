@@ -2,7 +2,6 @@ package com.harkka.harkkatyo;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.ParameterResolutionDelegate;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,10 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @SpringBootApplication
 @Controller
@@ -32,6 +27,18 @@ public class HarkkatyoController {
         return "home";
     }
 
+
+    @GetMapping("/tapahtumat/{id}")
+    public String tapahtumat(@PathVariable long id, Model model) {
+        model.addAttribute("tapahtumaVaraukset", tapahtumaRepository.getOne(id));
+        return "tapahtumat";
+    }
+
+    @PostMapping("/events/delete/{id}")
+    public String deleteEvent(@PathVariable long id) {
+        tapahtumaRepository.deleteById(id);
+        return "redirect:/";
+    }
 
 
     @PostMapping("/events/create")
