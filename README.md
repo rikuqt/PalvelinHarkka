@@ -1,9 +1,16 @@
-Tällä voi luoda tapahtumia ja tarkastella niitä eri sivuilta.
+# Tällä voi luoda tapahtumia ja käyttäjiä ja tarkastella niitä eri sivuilta.
 
+
+## Kirjautuminen
+Name: 123
+Password: 123
+Tällä pääsee sisään, mutta jos haluaa luoda oman käyttäjän -> Lihavoidut polut on kaikkien käytössä ilman kirjautumista (accounts välilehdeltä voi luoda uuden käyttäjän tietokantaan jolla voi kirjautua. Salasana on salattu).
+
+
+
+### Polut
 http://localhost:8080
-
-Polut:
 /tapahtumat/{id}
 /tapahtumat
-/accounts
-/h2-console
+**/accounts**
+**/h2-console**
