@@ -1,6 +1,7 @@
 package com.harkka.harkkatyo;
 
 
+import ch.qos.logback.classic.encoder.JsonEncoder;
 import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
