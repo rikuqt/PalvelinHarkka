@@ -1,3 +1,5 @@
+Tällä voi luoda tapahtumia ja tarkastella niitä eri sivuilta.
+
 http://localhost:8080
 
 Polut:
